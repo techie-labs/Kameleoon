@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalWasmDsl::class)
+
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -32,6 +35,11 @@ kotlin {
 
     // Desktop (JVM) Target
     jvm()
+
+    // Web (Wasm) Target
+    wasmJs {
+        browser()
+    }
 
     sourceSets {
         commonMain.dependencies {
@@ -99,10 +107,4 @@ mavenPublishing {
             developerConnection.set("scm:git:ssh://git@github.com/yourusername/kameleoon.git")
         }
     }
-}
-
-// Temporary workaround for missing iosApp folder causing task failure
-// Please delete the 'iosApp' folder manually from your project root to fix this permanently.
-tasks.matching { it.name.contains("convertPbxprojToJson") }.configureEach {
-    enabled = false
 }
