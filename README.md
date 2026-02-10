@@ -24,14 +24,22 @@
 
 ## Getting Started
 
-### 1. Rename and Configure
+### 1. Setup Environment
+
+Run the setup script to prepare your local environment:
+```shell
+./scripts/setup.sh
+```
+This will create a `local.properties` file from a template and ensure `gradlew` is executable.
+
+### 2. Rename and Configure
 Update `library/build.gradle.kts` with your library's details:
 * `mavenPublishing` block: Update `groupId`, `artifactId`, `version`, and `pom` details (licenses, developers, SCM).
 * `android` block: Update `namespace`.
 
 Update `spotless/copyright.kt` with your license header.
 
-### 2. Build and Run Sample
+### 3. Build and Run Sample
 
 **Android:**
 ```shell
@@ -43,7 +51,7 @@ Update `spotless/copyright.kt` with your license header.
 ./gradlew :sample:run
 ```
 
-### 3. Code Quality Checks
+### 4. Code Quality Checks
 
 **Format Code (Spotless):**
 ```shell
@@ -66,12 +74,16 @@ Update `spotless/copyright.kt` with your license header.
 ./gradlew dokkaHtml
 ```
 
-### 4. Publishing
+### 5. Publishing
 
 To publish to Maven Central, you need to configure your Sonatype credentials.
 The project is set up to use the `vanniktech` plugin. Refer to the [plugin documentation](https://github.com/vanniktech/gradle-maven-publish-plugin) for setting up secrets (GPG key, Sonatype username/password).
 
 A manual workflow is available at `.github/workflows/publish.yml`.
+
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ---
 
