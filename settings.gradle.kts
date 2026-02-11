@@ -34,4 +34,8 @@ plugins {
 }
 
 include(":library")
-include(":sample")
+include(":sample:shared")
+include(":sample:androidApp")
+include(":sample:desktopApp")
+include(":sample:webApp")
+// iosApp is an Xcode project, not a Gradle module, so we don't include it here.
