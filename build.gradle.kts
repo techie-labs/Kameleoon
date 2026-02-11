@@ -15,12 +15,17 @@ plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.spotless)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.kotlin.android) apply false
 }
 
 // Configuration for Binary Compatibility Validator
 apiValidation {
     // Ignore the sample project as it is not part of the public API
     ignoredProjects.add("sample")
+    ignoredProjects.add("shared")
+    ignoredProjects.add("androidApp")
+    ignoredProjects.add("desktopApp")
+    ignoredProjects.add("webApp")
 }
 
 // Configuration applied to all subprojects (library and sample)

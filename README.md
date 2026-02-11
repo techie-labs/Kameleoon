@@ -1,99 +1,116 @@
 <p align="center">
-  <img src="banner.svg" width="100%" alt="Kameleoon Banner">
+  <img src="banner.svg" width="100%" alt="Kameleoon - Kotlin Multiplatform Library Template Banner">
 </p>
 
 <p align="center">
   <a href="https://github.com/techie-labs/Kameleoon/actions"><img src="https://img.shields.io/github/actions/workflow/status/techie-labs/Kameleoon/build.yml?branch=main&logo=github&style=flat-square" alt="Build Status"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="License"></a>
-  <a href="https://kotlinlang.org"><img src="https://img.shields.io/badge/Kotlin-2.0.0-7F52FF.svg?style=flat-square&logo=kotlin" alt="Kotlin"></a>
-  <a href="https://www.jetbrains.com/lp/compose-multiplatform/"><img src="https://img.shields.io/badge/Compose%20Multiplatform-1.6.10-4285F4.svg?style=flat-square&logo=jetpackcompose" alt="Compose Multiplatform"></a>
+  <a href="https://kotlinlang.org"><img src="https://img.shields.io/badge/Kotlin-2.1.0-7F52FF.svg?style=flat-square&logo=kotlin" alt="Kotlin"></a>
+  <a href="https://www.jetbrains.com/lp/compose-multiplatform/"><img src="https://img.shields.io/badge/Compose%20Multiplatform-1.7.0-4285F4.svg?style=flat-square&logo=jetpackcompose" alt="Compose Multiplatform"></a>
 </p>
 
 # Kameleoon 🦎
+### The Ultimate Compose Multiplatform Library Template
 
-**Kameleoon** (derived from Chameleon) is an adaptive and comprehensive template for building **Compose Multiplatform Libraries** targeting Android, iOS, Desktop (JVM), and Web (Wasm). Just like a chameleon adapts to its environment, this template helps your UI code adapt seamlessly across platforms.
+**Kameleoon** is a production-ready, adaptive template designed to kickstart your **Kotlin Multiplatform (KMP)** and **Compose Multiplatform** library development. 
 
-## Project Structure
+Stop wasting time on build configuration. Kameleoon provides a pre-configured environment targeting **Android**, **iOS**, **Desktop (JVM)**, and **Web (Wasm)**, complete with publishing, linting, and documentation tools.
 
-* **`/library`**: The core module containing your shared library code.
-    * `commonMain`: Code shared across all platforms.
-    * `androidMain`, `iosMain`, `jvmMain`, `wasmJsMain`: Platform-specific implementations.
-* **`/sample`**: A sample application to demonstrate and test your library.
-    * Depends on the `:library` module.
-    * Runs on Android, Desktop, and Web.
+---
 
-## Features & Tools included
+## 🚀 Why Use Kameleoon?
 
-* **Kotlin Multiplatform**: Pre-configured for Android, iOS, Desktop, and Web (Wasm).
-* **Compose Multiplatform**: UI framework ready.
-* **Maven Publish Plugin**: Easy publishing to Maven Central using `vanniktech/gradle-maven-publish-plugin`.
-* **Binary Compatibility Validator**: Ensures your library's public API remains stable.
-* **Dokka**: Generates API documentation.
-* **Spotless**: Enforces code formatting (Ktlint) and license headers.
-* **Detekt**: Static code analysis for Kotlin.
-* **GitHub Actions**: CI/CD workflows for building, testing, and checking code quality.
-* **Helper Scripts**: Easy setup and workflow management scripts in `/scripts`.
+*   **⚡️ Zero Configuration Setup**: Start writing code immediately, not Gradle scripts.
+*   **📱 Cross-Platform Ready**: Targets Android, iOS, Desktop, and Web (Wasm) out of the box.
+*   **📦 Maven Central Publishing**: Automated publishing workflow using `vanniktech-maven-publish`.
+*   **Ui Kit Ready**: Pre-configured with Jetpack Compose / Compose Multiplatform for sharing UI.
+*   **🛡️ Quality First**: Integrated Spotless (Ktlint), Detekt, and Binary Compatibility Validator.
 
-## Getting Started
+## 📂 Project Structure
+
+The project is modularized to separate the library logic from the sample applications:
+
+*   **`/library`**: The core KMP module containing your shared code.
+    *   `commonMain`: Shared business logic and UI.
+    *   `androidMain`, `iosMain`, `jvmMain`, `wasmJsMain`: Platform-specific implementations.
+*   **`/sample`**: A playground to test your library across all platforms.
+    *   **`:sample:shared`**: Shared UI for the sample app.
+    *   **`:sample:androidApp`**: Native Android application.
+    *   **`:sample:iosApp`**: Native iOS application (Swift/Xcode).
+    *   **`:sample:desktopApp`**: Desktop application (Windows/macOS/Linux).
+    *   **`:sample:webApp`**: Web application running on WebAssembly (Wasm).
+
+## 🛠 Tech Stack & Tools
+
+*   **Language**: [Kotlin](https://kotlinlang.org/) (Latest)
+*   **UI Framework**: [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/)
+*   **Build System**: Gradle (Kotlin DSL) with Version Catalogs (`libs.versions.toml`)
+*   **Documentation**: [Dokka](https://github.com/Kotlin/dokka)
+*   **Code Quality**: [Spotless](https://github.com/diffplug/spotless), [Detekt](https://detekt.dev/)
+*   **CI/CD**: GitHub Actions
+
+## 🏁 Getting Started
 
 ### 1. Setup Environment
 
-Run the setup script to prepare your local environment:
+Run the setup script to prepare your local environment (creates `local.properties`, sets up git hooks):
 ```shell
 ./scripts/setup.sh
 ```
-This will create a `local.properties` file from a template, ensure `gradlew` is executable, and setup git hooks.
 
 ### 2. Rename and Configure
-Update `library/build.gradle.kts` with your library's details:
-* `mavenPublishing` block: Update `groupId`, `artifactId`, `version`, and `pom` details (licenses, developers, SCM).
-* `android` block: Update `namespace`.
-
-Update `spotless/copyright.kt` with your license header.
+Update `library/build.gradle.kts` with your library's identity:
+*   `mavenPublishing` block: Update `groupId`, `artifactId`, `version`.
+*   `pom` block: Update licenses, developers, and SCM links.
+*   `android` block: Update `namespace`.
 
 ### 3. Build and Run Sample
 
+Test your library immediately on any platform:
+
 **Android:**
 ```shell
-./gradlew :sample:assembleDebug
+./gradlew :sample:androidApp:installDebug
 ```
+
+**iOS:**
+Open `sample/iosApp/iosApp.xcodeproj` in Xcode and run on a simulator.
 
 **Desktop:**
 ```shell
-./gradlew :sample:run
+./gradlew :sample:desktopApp:run
 ```
 
 **Web (Wasm):**
 ```shell
-./gradlew :sample:wasmJsBrowserRun
+./gradlew :sample:webApp:wasmJsBrowserRun
 ```
 
-### 4. Code Quality Checks
+## ✅ Code Quality & Workflow
 
-Run the full workflow script to check everything at once:
+Run the full quality check suite before pushing:
 ```shell
 ./scripts/run-workflow.sh
 ```
 
-Or run individually:
+Or run individual checks:
 *   **Format Code:** `./gradlew spotlessApply`
 *   **Static Analysis:** `./gradlew detekt`
-*   **API Check:** `./gradlew apiCheck`
-*   **Documentation:** `./gradlew dokkaHtml`
+*   **API Compatibility:** `./gradlew apiCheck`
+*   **Generate Docs:** `./gradlew dokkaHtml`
 
-### 5. Publishing
+## 📦 Publishing
 
-To publish to Maven Central, you need to configure your Sonatype credentials.
-The project is set up to use the `vanniktech` plugin. Refer to the [plugin documentation](https://github.com/vanniktech/gradle-maven-publish-plugin) for setting up secrets (GPG key, Sonatype username/password).
+Publishing to Maven Central is handled by the [Vanniktech Maven Publish Plugin](https://github.com/vanniktech/gradle-maven-publish-plugin).
+1.  Configure your Sonatype (OSSRH) credentials in `local.properties` or environment variables.
+2.  Run the publish task or use the GitHub Action workflow `.github/workflows/publish.yml`.
 
-A manual workflow is available at `.github/workflows/publish.yml`.
+## 🤝 Contributing
 
-## Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
 ---
 
-## License
+## 📄 License
 
-[Add your license here]
+Licensed under the [Apache 2.0 License](LICENSE).
